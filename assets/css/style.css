@@ -1,0 +1,98 @@
+:root {
+    --second-color: #A05134;
+    --first-color: #F6DAB4;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#chessboard {
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    background-color: black;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+#chessboard .cb-row {
+    position: relative;
+    width: 100%;
+    height: calc(100%/8);
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#chessboard .cb-cell {
+    position: relative;
+    width: calc(100%/8);
+    transition: .4s;
+    height: calc(700px/8);
+    /* border: 1px solid rgb(119, 118, 118) */
+}
+
+.second-color {
+    background: var(--second-color);
+}
+
+.first-color {
+    background: var(--first-color);
+}
+
+.second-color:nth-child(2n+1) {
+    background-color: var(--first-color);
+}
+
+.first-color:nth-child(2n+1)  {
+    background-color: var(--second-color);
+}
+
+.letter {
+    position: absolute;
+    background: white;
+    padding: 8px;
+    top: 0;
+    left: 0;
+    border: 1px solid black;
+    opacity: 0;
+}
+
+.piece {
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 90%;
+    height: 90%;
+    cursor: pointer;
+    transition: .2s;
+    /* background: rgba(255, 0, 0, 0.562); */
+}
+
+.piece:hover {
+    background: rgba(156, 155, 150, 0.705);
+}
+
+.selected {
+    background: rgba(179, 152, 3, 0.705);
+}
+
+.piece img {
+    position: absolute;
+    width: 80px;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
