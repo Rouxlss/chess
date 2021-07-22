@@ -151,13 +151,19 @@ cells.forEach(cell => {
         }else if(selected_piece!="" && (cell.children.length == 2)) {
 
             if(cell.querySelector('.piece').classList.contains('black') && selected_piece_type=='white'){
+                cell.querySelector('.black').style.display="none";
                 console.log('Pieza contraria negra');
                 move_piece();
             }else if(cell.querySelector('.piece').classList.contains('white') && selected_piece_type=='black'){
+                cell.querySelector('.white').style.display="none";
                 console.log('Pieza contraria blanca');
                 move_piece();
             }
             
+        }
+
+        else if(selected_piece!="" && (cell.children.length == 3)){
+            alert('a');
         }
 
         // console.log("child count: " + cell.childElementCount);
