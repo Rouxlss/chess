@@ -11,8 +11,8 @@
 
 #chessboard {
     position: absolute;
-    width: 700px;
-    height: 700px;
+    width: 500px;
+    height: 500px;
     background-color: black;
     margin: auto;
     left: 0;
@@ -35,7 +35,7 @@
     position: relative;
     width: calc(100%/8);
     transition: .4s;
-    height: calc(700px/8);
+    height: calc(500px/8);
     /* border: 1px solid rgb(119, 118, 118) */
 }
 
@@ -89,10 +89,11 @@
 
 .piece img {
     position: absolute;
-    width: 80px;
+    width: 50px;
     margin: auto;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
 }
+

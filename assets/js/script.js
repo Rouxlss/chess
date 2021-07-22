@@ -59,7 +59,7 @@ let piece = {
 const create_piece = (i,j,type, chess_pieces_name) => {
 
     let piece = `
-    <div class="piece" id="${type}-${chess_pieces_id[i][j]}">
+    <div class="piece ${type}" id="${type}-${chess_pieces_id[i][j]}">
         <img class="piece_img" src="./assets/img/pieces/${type}-${chess_pieces_name[i][j]}.png">
     </div>
     `;
@@ -72,22 +72,29 @@ let rows = document.querySelectorAll('.cb-row');
 for (let i = 0; i < 2 ; i++) { 
     for (let j = 0; j < 8; j++) { 
         let piece = create_piece(i,j, 'black', chess_pieces_name);
-        rows[i].querySelectorAll('.cb-cell')[j].innerHTML = piece;   
+        rows[i].querySelectorAll('.cb-cell')[j].innerHTML += piece;   
     }
 }
 
 for (let i = 1; i >= 0; i--) { 
     for (let j = 0; j < 8; j++) { 
         let piece = create_piece(i,j, 'white', chess_pieces_name);  
-        rows[7-i].querySelectorAll('.cb-cell')[j].innerHTML = piece;
+        rows[7-i].querySelectorAll('.cb-cell')[j].innerHTML += piece;
     }
 }
 
+const sound = () => {
+    let audio = new Audio('./assets/audio/take-piece.mp3');
+    audio.play();
+}
 
 let pieces = document.querySelectorAll('.piece');
 let cells = document.querySelectorAll('.cb-cell');
 
 let selected_piece = "";
+let selected_piece_type = "";
+let moved = false;
+let moved_to_white_space = false;
 
 pieces.forEach(piece => {
 
@@ -97,22 +104,25 @@ pieces.forEach(piece => {
             piece.classList.remove('selected');
         })
 
-        piece.classList.add('selected');
 
-        let audio = new Audio('./assets/audio/take-piece.mp3');
-        audio.play();
-        
+        piece.classList.add('selected');
+        sound();
+
         // console.log("id: " + piece.id);
         // console.log("piece: " + piece.parentElement.id);
 
         setTimeout(() => {
+            
             selected_piece = piece;
+            selected_piece_type = piece.classList[1];
             // console.log(`pieza ${piece.id} seleccionada `);
             console.log(selected_piece);
+            console.log(selected_piece_type);
+
         }, 100);
+      
 
     });
-
 });
 
 
@@ -121,13 +131,33 @@ cells.forEach(cell => {
     cell.addEventListener('click', ()=>{
 
         // console.log("id cell: " + cell.id);
-
-        if(selected_piece!=""){
-            // console.log("pieza movida");
+        // console.log("Lenght: " + cell.children.length);
+        
+        const move_piece = () => {
             cell.append(selected_piece);
             selected_piece=""
-            let audio = new Audio('./assets/audio/take-piece.mp3');
-            audio.play();
+            sound();
+            pieces.forEach(piece => {
+                piece.classList.remove('selected');
+            });
+        }
+
+        if(selected_piece!="" && (cell.children.length == 1 )){
+            // console.log("Lenght: " + cell.childNodes.length);
+            move_piece();    
+            moved_to_white_space==true;
+            
+            
+        }else if(selected_piece!="" && (cell.children.length == 2)) {
+
+            if(cell.querySelector('.piece').classList.contains('black') && selected_piece_type=='white'){
+                console.log('Pieza contraria negra');
+                move_piece();
+            }else if(cell.querySelector('.piece').classList.contains('white') && selected_piece_type=='black'){
+                console.log('Pieza contraria blanca');
+                move_piece();
+            }
+            
         }
 
         // console.log("child count: " + cell.childElementCount);
