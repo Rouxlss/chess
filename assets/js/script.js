@@ -152,10 +152,12 @@ cells.forEach(cell => {
 
             if(cell.querySelector('.piece').classList.contains('black') && selected_piece_type=='white'){
                 cell.querySelector('.black').style.display="none";
+                cell.querySelector('.black').remove();
                 console.log('Pieza contraria negra');
                 move_piece();
             }else if(cell.querySelector('.piece').classList.contains('white') && selected_piece_type=='black'){
                 cell.querySelector('.white').style.display="none";
+                cell.querySelector('.white').remove();
                 console.log('Pieza contraria blanca');
                 move_piece();
             }
