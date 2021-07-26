@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans&display=swap');
+
 :root {
     --second-color: #A05134;
     --first-color: #F6DAB4;
@@ -7,6 +10,72 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+}
+
+body {
+    background: rgb(68, 51, 39);
+}
+
+.alert {
+    position: fixed;
+    padding: 15px;
+    font-family: 'DM Sans', sans-serif;
+    background: rgb(241, 187, 187);
+    border-left: 2px solid red;
+    margin: 10px;
+    opacity: 0;
+    transition: .4s;
+}
+
+.history {
+    position: absolute;
+    width: 300px;
+    height: 90vh;
+    background-color: rgb(71, 71, 70);
+    margin: auto;
+    right: 20px;
+    border-radius: 10px;
+    top: 0;
+    bottom: 0;
+}
+
+.moves {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(60, 66, 60, 0.075);
+    display: flex;
+}
+
+.side {
+    position: relative;
+    width: 30%;
+    height: 100%;
+}
+
+.side li {
+    list-style: none;
+    width: 65px;
+    background: rgba(0, 0, 0, 0.288);
+    text-align: center;
+    margin-top: 20px;
+    margin-left: 30px;
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.582);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+}
+
+.side img {
+    width: 30px;
+    margin-right: 5px;
+    margin-left: 2px;
+}
+
+.side span {
+
 }
 
 #chessboard {
@@ -20,6 +89,7 @@
     top: 0;
     bottom: 0;
 }
+
 
 #chessboard .cb-row {
     position: relative;

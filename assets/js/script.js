@@ -96,6 +96,18 @@ let selected_piece_type = "";
 let moved = false;
 let moved_to_white_space = false;
 
+let turn = 1;
+
+let sides = document.querySelectorAll('.side');
+let alert_msg = document.querySelector('.alert');
+
+const alert_animation = () => {
+    alert_msg.style.opacity = 1;
+    setTimeout(() => {
+        alert_msg.style.opacity = 0;
+    }, 1500);
+}
+
 pieces.forEach(piece => {
 
     piece.addEventListener('click', ()=>{
@@ -104,23 +116,36 @@ pieces.forEach(piece => {
             piece.classList.remove('selected');
         })
 
+        const config_move = () => {
+            if(piece.parentElement.children.length==2){
+                piece.classList.add('selected');
+                sound();
+                setTimeout(() => {
+                
+                    selected_piece = piece;
+                    selected_piece_type = piece.classList[1];
+                    // console.log(`pieza ${piece.id} seleccionada `);
+        
+                }, 100);
+            }
+        }
 
-        piece.classList.add('selected');
-        sound();
+        if( turn==1 && piece.classList[1]=='white') {
+            config_move();
+            turn = 2;
+        }else if (turn == 2 && piece.classList[1]=='black') {
+            config_move();
+            turn = 1;
+        }else if(turn==2 && piece.classList[1]=='white') {
+            alert_msg.querySelector('p').innerHTML = 'No puedes mover, es el turno de las negras'
+            alert_animation();
+        }else if(turn==1 && piece.classList[1]=='black') {
+            alert_msg.querySelector('p').innerHTML = 'No puedes mover, es el turno de las blancas'
+            alert_animation();
+        }
 
         // console.log("id: " + piece.id);
         // console.log("piece: " + piece.parentElement.id);
-
-        setTimeout(() => {
-            
-            selected_piece = piece;
-            selected_piece_type = piece.classList[1];
-            // console.log(`pieza ${piece.id} seleccionada `);
-            console.log(selected_piece);
-            console.log(selected_piece_type);
-
-        }, 100);
-      
 
     });
 });
@@ -133,39 +158,58 @@ cells.forEach(cell => {
         // console.log("id cell: " + cell.id);
         // console.log("Lenght: " + cell.children.length);
         
-        const move_piece = () => {
+        const move_piece = (index) => {
+
+            let piece_img = selected_piece.querySelector('img').src;
+            let cell_id = cell.id;
+
+            let move = `<li><img src="${piece_img}" alt=""> <span>${cell_id}</span></li>`;
+            
+            sides[index].innerHTML += move;
+
             cell.append(selected_piece);
             selected_piece=""
             sound();
+
             pieces.forEach(piece => {
                 piece.classList.remove('selected');
             });
+
+            setTimeout(() => {
+                selected_piece = '';
+                selected_piece_type = '';
+            }, 100);
+
+
         }
 
         if(selected_piece!="" && (cell.children.length == 1 )){
             // console.log("Lenght: " + cell.childNodes.length);
-            move_piece();    
-            moved_to_white_space==true;
+
+
+            if(selected_piece_type=='white'){
+                move_piece(0);
+            }else if(selected_piece_type=='black'){
+                move_piece(1);
+            }
             
             
         }else if(selected_piece!="" && (cell.children.length == 2)) {
 
             if(cell.querySelector('.piece').classList.contains('black') && selected_piece_type=='white'){
-                cell.querySelector('.black').style.display="none";
-                cell.querySelector('.black').remove();
-                console.log('Pieza contraria negra');
-                move_piece();
+                let parent_black_piece = cell.querySelector('.black').parentElement;
+                let black_piece = parent_black_piece.querySelector('.black');
+                black_piece.remove();
+                move_piece(0);
+                turn = 2;
             }else if(cell.querySelector('.piece').classList.contains('white') && selected_piece_type=='black'){
-                cell.querySelector('.white').style.display="none";
-                cell.querySelector('.white').remove();
-                console.log('Pieza contraria blanca');
-                move_piece();
+                let parent_white_piece = cell.querySelector('.white').parentElement;
+                let white_piece = parent_white_piece.querySelector('.white');
+                white_piece.remove();
+                move_piece(1);
+                turn = 1;
             }
             
-        }
-
-        else if(selected_piece!="" && (cell.children.length == 3)){
-            alert('a');
         }
 
         // console.log("child count: " + cell.childElementCount);
