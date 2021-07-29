@@ -83,6 +83,25 @@ for (let i = 1; i >= 0; i--) {
     }
 }
 
+let game_cells = document.querySelectorAll('.cb-cell');
+
+let game = [];
+let row = [];
+
+// COnfigurando la matriz del juego
+
+for (let i = 1; i <= game_cells.length; i++) {
+    
+    row.push(game_cells[i-1]);
+    if (i%8==0) {
+        game.push(row);
+        row=[];
+    }
+}
+
+console.log({game});
+
+
 const sound = () => {
     let audio = new Audio('./assets/audio/take-piece.mp3');
     audio.play();
