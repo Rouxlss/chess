@@ -2,8 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans&display=swap');
 
 :root {
-    --second-color: #A05134;
-    --first-color: #F6DAB4;
+    --second-color: #00000000;
+    --first-color: #ffffff00;
+    /* --second-color: #A05134;
+    --first-color: #F6DAB4; */
 }
 
 * {
@@ -14,6 +16,24 @@
 
 body {
     background: rgb(68, 51, 39);
+}
+
+.chessboard__bg {
+    position: absolute;
+    width: 50%;
+    height: 100vh;
+    left: 0;
+    right: 0;
+    margin: auto;
+    object-fit: cover;
+}
+
+.bg {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    opacity: 0.2;
 }
 
 .alert {
@@ -81,13 +101,13 @@ body {
 
 #chessboard {
     position: absolute;
-    width: 500px;
-    height: 500px;
-    background-color: black;
+    width: 370px;
+    height: 360px;
+    background-color: rgba(0, 0, 0, 0);
     margin: auto;
     left: 0;
     right: 0;
-    top: 0;
+    top: 20px;
     bottom: 0;
 }
 
@@ -106,7 +126,7 @@ body {
     position: relative;
     width: calc(100%/8);
     transition: .4s;
-    height: calc(500px/8);
+    height: calc(400px/8);
     /* border: 1px solid rgb(119, 118, 118) */
 }
 
@@ -147,6 +167,7 @@ body {
     height: 90%;
     cursor: pointer;
     transition: .2s;
+    object-fit: contain;
     /* background: rgba(255, 0, 0, 0.562); */
 }
 
@@ -166,5 +187,8 @@ body {
     right: 0;
     top: 0;
     bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
