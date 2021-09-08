@@ -2,10 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans&display=swap');
 
 :root {
-    --second-color: #00000000;
-    --first-color: #ffffff00;
-    /* --second-color: #A05134;
-    --first-color: #F6DAB4; */
+    /* --second-color: #00000000;
+    --first-color: #ffffff00; */
+    --second-color: #A05134;
+    --first-color: #F6DAB4;
 }
 
 * {
@@ -101,8 +101,8 @@ body {
 
 #chessboard {
     position: absolute;
-    width: 370px;
-    height: 360px;
+    width: 27%;
+    height: 55%;
     background-color: rgba(0, 0, 0, 0);
     margin: auto;
     left: 0;
@@ -126,8 +126,8 @@ body {
     position: relative;
     width: calc(100%/8);
     transition: .4s;
-    height: calc(400px/8);
-    /* border: 1px solid rgb(119, 118, 118) */
+    height: calc(100%);
+    border: 1px solid rgb(119, 118, 118)
 }
 
 .second-color {
